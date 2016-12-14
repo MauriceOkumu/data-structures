@@ -16,6 +16,11 @@ stackMethods.push = function (val) {
 };
 
 stackMethods.pop = function () {
+	if ( this.numKeys > 0) {
+		var temp = this.storage[this.numKeys];
+		delete this.storage[this.numKeys--];
+	}
+	return temp;
 
 };
 
