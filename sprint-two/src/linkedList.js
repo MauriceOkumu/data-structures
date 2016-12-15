@@ -13,8 +13,10 @@ var LinkedList = function() {
 
   list.removeHead = function() {
     if (list.head.next) {
+      var val = list.head.value;
       list.head = list.head.next;
     }
+    return val;
   };
 
   list.contains = function(target) {
