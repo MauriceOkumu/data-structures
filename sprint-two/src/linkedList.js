@@ -20,6 +20,13 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
+    if (list.head.value === target) {
+      return true;
+    }
+    if (list.head.next && list.head.next.value === target) {
+      return true;
+    }
+    return false;
   };
 
   return list;
