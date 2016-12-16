@@ -37,16 +37,16 @@ var LimitedArray = function(limit) {
       throw new Error('Error trying to access an over-the-limit index');
     }
   };
-  limitedArray.getIndexBelowMaxForKey = function(str, max) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-      hash = (hash << 5) + hash + str.charCodeAt(i);
-      hash = hash & hash; // Convert to 32bit integer
-      hash = Math.abs(hash);
-    }
-    return hash % max;
-  };
   return limitedArray;
+};
+var getIndexBelowMaxForKey = function(str, max) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+    hash = hash & hash; // Convert to 32bit integer
+    hash = Math.abs(hash);
+  }
+  return hash % max;
 };
 
 // This is a "hashing function". You don't need to worry about it, just use it
