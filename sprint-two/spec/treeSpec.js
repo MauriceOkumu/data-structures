@@ -41,4 +41,32 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should be able to find any node\'s parent', function() {
+    tree.addChild(5);
+    expect(tree.children[0].parent).to.eql(tree);
+    tree.children[0].addChild(6);
+    expect(tree.children[0].children[0].parent).to.eql(tree.children[0]);
+  });
+
+  it('should be able to disassocite a child from it\'s parent', function() {
+    tree.addChild(8);
+    tree.addChild(9);
+    var orphan = tree.children[1];
+    tree.removeFromParent(tree.children[1]);
+    expect(tree.contains(9)).to.be.false;
+    expect(orphan.parent).to.equal(null);
+  });
+
+  it('should be able to execute a calback on every node\'s value in the tree', function() {
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[0].children[0].addChild(8);
+    tree.traverse(function(tree) {
+      tree.value = tree.value * 2;
+    });
+    expect(tree.children[0].value).to.equal(12);
+    expect(tree.children[0].children[0].value).to.equal(14);
+    expect(tree.children[0].children[0].children[0].value).to.equal(16);
+  });
+
 });
